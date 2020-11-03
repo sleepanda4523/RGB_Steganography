@@ -61,3 +61,37 @@ while len(flist) != 2:
 인수 개수의 절반까지의 인덱스에 위의 알고리즘으로 계산한 값을 넣는다.    
 두 번째 for문은 인덱스 절반 부터 끝까지 인수들을 pop(), 삭제해준다.    
 -> 이렇게 하면 결국 배열이 절반으로 계속해서 축소하게 된다.      
+
+
+## MAKE PNG     
+```python   
+image1 = Image.new("RGB",(flist[0],flist[1]))
+img1 = image1.load()
+(width, height) = image1.size
+
+idx = 1
+for i in range(0,width):
+	for j in range(0,height):
+		rgbcode = rgblist[idx]
+		rgb1 = rgbcode[0:2]
+		rgb2 = rgbcode[2:4]
+		rgb3 = rgbcode[4:]		
+		img1[i,j] = (int(rgb1,16), int(rgb2,16),int(rgb3,16))
+		idx+=1
+
+image1.save("image1.png")
+```   
+먼저 이미지를 계산한 크기에 따라 생성하고, 
+rgblist에서 rgbcode를 하나씩 뽑아서 두글자씩 나누고, 
+16진수로 표현되어 있는 코드를 10진수로 바꿔서(Image 모듈은 0~255 형식으로 입력받는다.)    
+픽셀 좌표에 색깔을 입력한다.  
+
+
+
+
+
+
+
+
+
+
