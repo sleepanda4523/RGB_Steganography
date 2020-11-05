@@ -123,9 +123,43 @@ def rgb_png(rgbstring):
             idx+=1
 
     image1.save("image1.png")
+    
+"""------------------------RGB------------------------"""
+def rgbtext(cip):
+    crypto = cip #원본 파일 열기
+    result = open("result.txt", "w") #파일 제작
+    first = 0 #분할을 위한 변수 1 - 앞쪽
+    last = 6 #분할을 위한 변수 2 - 뒤쪽
+
+    crypto_data = crypto #원본 파일 읽어오기
+    line_data_len = len(crypto_data) #오리지널 파일 길이
+    line_data_for = len(crypto_data)/6 #반복 횟수
+    line_data_if = len(crypto_data)%6 #파일의 문자가 나누어 떨어지지 않는 경우
+    last_data_len = 0
+    last_data = 0
+
+    for line_for in range(int(line_data_for)):
+        line_data = "#"+crypto_data[first:last]
+        result+=line_data
+        first = first+6
+        last = last+6
+#RGB코드로 변환
+
+    last_data_for = last-6# 반복문에서 마지막에 6을 더해줘서 6을 뺌
+
+    if line_data_if != 0:# RSA암호문이 6으로 나누어 떨어지지 않을경우
+        last_data = crypto_data[last_data_for:line_data_len] #꼬투리
+        last_data_len = 6 - len(last_data) #6칸에서 꼬투리를 뺀 나머지 크기(0을 넣어야하는 횟수)
+        result+="#" #앞에 "#"을 붙임
+
+    for result_for in range(last_data_len): #0을 넣음
+        result+=0
+
+    result+=last_data #꼬투리 집어넣음.
+    return result
 
 if __name__ == "__main__": 
      bintext = File_bin()
      cip = RSA(bintext)
-     rgbstring = ""
+     rgbstring = rgbtext(cip)
      rgb_png(rgbstring)
