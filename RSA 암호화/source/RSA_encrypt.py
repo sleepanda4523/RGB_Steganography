@@ -4,7 +4,7 @@ from math import gcd
 
 def sendkey(Tf):                    # 공개키 e와 개인키 d생성
     
-    e = 5;  #Public 
+    e = 3;  #Public 
     while e<Tf and gcd(e, Tf)!=1:
         e += 1
     
@@ -31,7 +31,7 @@ def encrypt(key, n,ptext):          #암호화
          cip = hex((int(char,16) ** key) % n)
          if len(cip) == 3:
              cip = cip[:2]+'0'+cip[2:]
-         print(f"{hexi} : {char} -> {cip}")
+         #print(f"{hexi} : {char} -> {cip}")
          cipher.append(cip)
     
     return cipher
@@ -62,7 +62,6 @@ if __name__ == "__main__":
     n=p*q
     Totient = (p-1)*(q-1)
     e ,d = sendkey(Totient)
-    print(e)
     cip, res = test(e, d, n, plaintext)
     #print(res)
 
