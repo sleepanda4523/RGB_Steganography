@@ -3,7 +3,6 @@ import binascii
 from PIL import Image
 from factordb.factordb import FactorDB
 
-
 def File_bin():
     f = open("testjpg.jpg","rb+")
     string = ""

@@ -2,7 +2,6 @@
 from PIL import Image
 
 """-------------------RGB코드 추출---------------------"""
-
 def rgbopen(path): # 사진 RGB로 열기, 픽셀 = 0,0
     img = Image.open(str(path))
     img_RGB = img.convert("RGB")
