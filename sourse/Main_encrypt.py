@@ -2,14 +2,25 @@ from math import gcd
 import binascii
 from PIL import Image
 from factordb.factordb import FactorDB
+from sys import exit
+from os import system
 
 def File_bin():
-    f = open("testjpg.jpg","rb+")
-    string = ""
-    line = f.read()
-    string+=str(binascii.b2a_hex(line))
-    string = string.replace("'", "")
-    string = string[1:]
+    filename = input("파일확장자까지 포함된 파일명을 입력해주세요\n")
+    try : 
+        f = open(filename,"rb+")
+    except FileNotFoundError:
+        print("파일이 없습니다")
+        exit()
+    else :
+        string = ""
+        line = f.read()
+        string+=str(binascii.b2a_hex(line))
+        string = string.replace("'", "")
+        string = string[1:]
+        return string
+    
+    
 """-----------------------RSA--------------------------"""
 def sendkey(Tf):                    # 공개키 e와 개인키 d생성
     
@@ -162,3 +173,4 @@ if __name__ == "__main__":
      cip = RSA(bintext)
      rgbstring = rgbtext(cip)
      rgb_png(rgbstring)
+     system("pause")
