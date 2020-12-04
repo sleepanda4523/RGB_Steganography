@@ -1,11 +1,19 @@
 # -*- coding: utf-8 -*-
 from PIL import Image
+from sys import exit
+from os import system
 
 """-------------------RGB코드 추출---------------------"""
 def rgbopen(path): # 사진 RGB로 열기, 픽셀 = 0,0
-    img = Image.open(str(path))
-    img_RGB = img.convert("RGB")
-    return img_RGB
+    try : 
+        img = Image.open(str(path))
+    except FileNotFoundError:
+        print("파일이 없습니다")
+        exit()
+    else : 
+        img_RGB = img.convert("RGB")
+        return img_RGB
+    
 
 def rgbprint(img, x,y): # RGB 코드 단일 추출
     RGBvalue = img.getpixel((x,y))
@@ -56,3 +64,4 @@ if __name__ == "__main__":
         file.write(ptext)
     
     file.close()
+    system("pause")
