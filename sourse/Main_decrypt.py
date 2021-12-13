@@ -47,15 +47,10 @@ def decrypt(key,n, ctext):          #복호화
 
 
 if __name__ == "__main__":
-    filepath = "image1.png"     #input("암호화 된 사진파일 명(확장자포함) : ")"""
-    file = open("decrypt.txt","w")
-    
-    #private, n = map(int,input("개인키와 n : ").split())
-    #last_len = int(input("rgb오차값"))
+    filepath = "image1.png"     #input("암호화 된 사진파일 명(확장자포함) : ")"""  
     rgbtext = sendRGB(filepath)
-    
-    #rgbtext = rgbtext
-    #ptext = decrypt(private, n, rgbtext)
-   
-    file.write(rgbtext)
-    file.close()
+    edit_rgb = list(map(''.join, zip(*[iter(rgbtext)]*2)))
+    rgblist = [int(i, base=16) for i in edit_rgb]
+        
+    with open("decrypt.png", "wb") as f:
+        f.write(bytes(rgblist))
